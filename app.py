@@ -19,7 +19,11 @@ def build_sidebar():
         tickers = st.multiselect(label="Selecione os ativos", options = ticker_list, placeholder="Tokens")
         start_date = st.date_input("De:", format = "DD/MM/YYYY", value=datetime(2022,1,2))
         end_date = st.date_input("Até:", format= "DD/MM/YYYY", value = "today")
-        #if ticker =
+        if tickers: 
+            url_range = f'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=usd&from={start_date}&to={end_date}'
+            prices = requests.get(url_range)
+            #prices = {tickers} {start_date} {end_date}
+            return tickers, prices
     else:
         st.write("Erro ao acessar CoinGecko")
 
